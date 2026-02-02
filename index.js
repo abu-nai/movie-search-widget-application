@@ -1,5 +1,4 @@
-createAutoComplete({
-    root: document.querySelector('.autocomplete'),
+const autoCompleteConfig = {
     renderOption(movie) {
         // if item.Poster === 'N/A' is truthy, return ''; if it is falsy, 
         const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
@@ -31,6 +30,18 @@ createAutoComplete({
         // uppercase S in Search to match the specific property name in this omdbapi. not the standard way, but must follow the convention the API author set.
         return response.data.Search;
     }
+};
+
+createAutoComplete({
+    // the ellipses copies all of the properties of the object autoCompleteConfig into this createAutoComplete object
+    ...autoCompleteConfig,
+    root: document.querySelector('#left-autocomplete'),
+});
+
+createAutoComplete({
+    // the ellipses copies all of the properties of the object autoCompleteConfig into this createAutoComplete object
+    ...autoCompleteConfig,
+    root: document.querySelector('#right-autocomplete'),
 });
 
 const onMovieSelect = async (movie) => {
